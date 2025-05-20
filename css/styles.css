@@ -220,10 +220,11 @@ a:focus-visible, .icon-social:focus-visible img {
   background: rgba(35, 37, 38, 0.9);
   border: 1px solid #FF2C2C;
   border-radius: 20px;
-  padding: 3px 10px;
-  display: flex;
+  padding: 4px 12px;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
   font-size: 0.75rem;
   color: #f5f5f5;
   z-index: 3;
@@ -232,7 +233,7 @@ a:focus-visible, .icon-social:focus-visible img {
 .disponible-text {
   display: inline-block;
   line-height: 1;
-  transform: translateY(1px);
+  margin-top: 1px;
 }
 
 .header-title-box {
