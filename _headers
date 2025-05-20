@@ -1,0 +1,7 @@
+/files/*
+  Content-Type: application/octet-stream
+  Content-Disposition: attachment
+
+/files/CV_JesusGarciaMolina.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment; filename="CV_JesusGarciaMolina.pdf"

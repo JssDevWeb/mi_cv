@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test jsPDF</title>
+</head>
+<body>
+  <h1>Prueba de jsPDF</h1>
+  <p>Haz clic en el botón para generar un PDF de prueba.</p>
+  <button id="generatePDF">Generar PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    document.getElementById('generatePDF').addEventListener('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      doc.text("¡PDF de prueba generado correctamente!", 20, 20);
+      doc.text("Si puedes ver este mensaje, jsPDF funciona bien.", 20, 30);
+      
+      doc.save("test.pdf");
+    });
+  </script>
+</body>
+</html>

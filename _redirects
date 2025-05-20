@@ -1,0 +1,7 @@
+# Redirecciones para el manejo del CV
+
+# Si hay un error al descargar el PDF, utilizar el PDF estático directamente
+/files/CV_JesusGarciaMolina.pdf   /files/CV_JesusGarciaMolina.pdf   500!
+
+# Redirigir 404 a la página principal
+/*                               /index.html                        404
