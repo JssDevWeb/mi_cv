@@ -5,47 +5,83 @@
   document.addEventListener('DOMContentLoaded', function() {
     const downloadBtn = document.querySelector('a[href="files/CV_JesusGarciaMolina.pdf"]');
     
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', function(e) {
+    if (downloadBtn) {      downloadBtn.addEventListener('click', async function(e) {
         e.preventDefault();
-            try {
-          generatePDF();
+        const downloadMessage = document.createElement('div');
+        downloadMessage.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: rgba(255, 44, 44, 0.9);
+          color: white;
+          padding: 12px 20px;
+          border-radius: 4px;
+          font-size: 14px;
+          z-index: 1000;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        `;
+        downloadMessage.textContent = 'Generando PDF...';
+        document.body.appendChild(downloadMessage);
+        
+        try {
+          await generatePDF();
+          downloadMessage.textContent = '¡PDF generado correctamente!';
+          setTimeout(() => downloadMessage.remove(), 2000);
         } catch (error) {
           console.error('Error al generar PDF:', error);
-          // Si hay un error, redirigir al PDF estático como fallback
-          window.location.href = 'files/CV_JesusGarciaMolina.pdf';
+          downloadMessage.textContent = 'Usando versión alternativa del CV...';
+          setTimeout(() => {
+            downloadMessage.remove();
+            window.location.href = 'files/CV_JesusGarciaMolina.pdf';
+          }, 1500);
         }
       });
-    }      function generatePDF() {
-      // Crear un nuevo documento PDF
+    }      function generatePDF() {      // Crear un nuevo documento PDF
       try {
         // Asegurarse de que jsPDF está disponible
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-      
-      // Añadir texto al PDF
-      doc.setFontSize(22);
+        const doc = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4',
+          putOnlyUsedFonts: true,
+          floatPrecision: 16
+        });
+        // Configuración inicial de fuentes y estilos
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(24);
       doc.setTextColor(255, 44, 44);
       doc.text("JESÚS GARCÍA MOLINA", 105, 20, { align: "center" });
-      
+        // Subtítulo con mejor espaciado
+      doc.setFont("helvetica", "normal");
       doc.setFontSize(16);
       doc.setTextColor(80, 80, 80);
       doc.text("Desarrollador Web Full Stack", 105, 30, { align: "center" });
       
-      // Agregar línea separadora decorativa
+      // Línea separadora decorativa mejorada
       doc.setDrawColor(255, 44, 44);
-      doc.setLineWidth(0.5);
-      doc.line(30, 35, 180, 35);
-      
-      // Información de contacto
-      doc.setFontSize(14);
+      doc.setLineWidth(0.3);
+      doc.setLineDashPattern([1, 1], 0);
+      doc.line(40, 35, 170, 35);
+        // Información de contacto con mejor formato
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
       doc.setTextColor(255, 44, 44);
       doc.text("CONTACTO", 20, 45);
-      doc.line(20, 47, 60, 47);
       
-      doc.setFontSize(12);
-      doc.setTextColor(60, 60, 60);
+      // Línea de sección mejorada
+      doc.setLineWidth(0.5);
+      doc.setLineDashPattern([], 0);
+      doc.line(20, 47, 80, 47);
+      
+      // Detalles de contacto con mejor espaciado
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(80, 80, 80);
       doc.text("Email:", 20, 55);
+      
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(60, 60, 60);
       doc.text("jss.seeingred@gmail.com", 70, 55);
       
       doc.text("Teléfono:", 20, 62);
@@ -122,23 +158,25 @@
       doc.text("60%", 100, 180);
       doc.text("70%", 100, 188);
       doc.text("60%", 100, 196);
+        // Barras de habilidades mejoradas
+      const drawSkillBar = (y, percentage) => {
+        // Fondo de la barra
+        doc.setDrawColor(240, 240, 240);
+        doc.setFillColor(240, 240, 240);
+        doc.roundedRect(60, y - 1, 35, 3, 1, 1, 'F');
+        
+        // Barra de progreso
+        doc.setDrawColor(255, 44, 44);
+        doc.setFillColor(255, 44, 44);
+        doc.roundedRect(60, y - 1, 35 * (percentage / 100), 3, 1, 1, 'F');
+      };
       
-      // Barras de habilidades (Fondo)
-      for (let i = 0; i < 5; i++) {
-        const y = 163 + (i * 8);
-        doc.setDrawColor(220, 220, 220);
-        doc.setFillColor(220, 220, 220);
-        doc.rect(60, y - 1, 35, 3, 'F');
-      }
-      
-      // Barras de habilidades (Progreso)
-      doc.setDrawColor(255, 44, 44);
-      doc.setFillColor(255, 44, 44);
-      doc.rect(60, 162, 31.5, 3, 'F'); // 90%
-      doc.rect(60, 170, 26.25, 3, 'F'); // 75%
-      doc.rect(60, 178, 21, 3, 'F'); // 60%
-      doc.rect(60, 186, 24.5, 3, 'F'); // 70%
-      doc.rect(60, 194, 21, 3, 'F'); // 60%
+      // Dibujar las barras con el nuevo estilo
+      drawSkillBar(163, 90); // HTML5/CSS3
+      drawSkillBar(171, 75); // JavaScript
+      drawSkillBar(179, 60); // React
+      drawSkillBar(187, 70); // PHP/Laravel
+      drawSkillBar(195, 60); // WordPress
       
       // Otras capacidades
       doc.setTextColor(255, 44, 44);
