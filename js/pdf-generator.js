@@ -170,17 +170,39 @@
         doc.setFillColor(255, 44, 44);
         doc.roundedRect(60, y - 1, 35 * (percentage / 100), 3, 1, 1, 'F');
       };
+        // Capacidades técnicas con barras de progreso ajustadas
+      const habilidades = [
+        { nombre: "HTML5/CSS3", porcentaje: 90 },
+        { nombre: "JavaScript", porcentaje: 75 },
+        { nombre: "React", porcentaje: 60 },
+        { nombre: "PHP/Laravel", porcentaje: 70 },
+        { nombre: "WordPress", porcentaje: 60 }
+      ];
+        let posY = 164;
+      habilidades.forEach((habilidad, index) => {
+        // Texto de la habilidad
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.setTextColor(60, 60, 60);
+        doc.text(habilidad.nombre, 20, posY);
+        doc.text(habilidad.porcentaje + "%", 95, posY);
+          // Barra de progreso
+        doc.setDrawColor(240, 240, 240);
+        doc.setFillColor(240, 240, 240);
+        doc.roundedRect(35, posY + 2, 55, 3, 1, 1, 'F');
+        
+        doc.setDrawColor(255, 44, 44);
+        doc.setFillColor(255, 44, 44);
+        doc.roundedRect(35, posY + 2, (55 * habilidad.porcentaje / 100), 3, 1, 1, 'F');
+        
+        posY += 8;
+      });
       
-      // Dibujar las barras con el nuevo estilo
-      drawSkillBar(163, 90); // HTML5/CSS3
-      drawSkillBar(171, 75); // JavaScript
-      drawSkillBar(179, 60); // React
-      drawSkillBar(187, 70); // PHP/Laravel
-      drawSkillBar(195, 60); // WordPress
-      
-      // Otras capacidades
+      // Otras capacidades con mejor espaciado
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
       doc.setTextColor(255, 44, 44);
-      doc.text("Otras capacidades:", 20, 205);
+      doc.text("OTRAS CAPACIDADES", 20, 220);
       
       doc.setTextColor(60, 60, 60);
       doc.text("- Usabilidad y accesibilidad web (WCAG 2.1)", 20, 211);
@@ -228,34 +250,50 @@
       doc.text("ESO – IES Infanta Elena", 20, 114);
       doc.setFontSize(11);
       doc.text("2004–2008 | Nivel 2 EQF-MEC", 20, 120);
-      
-      // Competencias personales
+        // Competencias personales con mejor formato
+      doc.setFont("helvetica", "bold");
       doc.setFontSize(14);
       doc.setTextColor(255, 44, 44);
       doc.text("COMPETENCIAS PERSONALES", 20, 135);
-      doc.line(20, 137, 120, 137);
+      doc.setLineWidth(0.5);
+      doc.line(20, 137, 190, 137);
       
-      // Lista de competencias
-      doc.setFontSize(12);
-      doc.setTextColor(255, 44, 44);
-      doc.text("Creatividad", 20, 147);
-      doc.setFontSize(10);
-      doc.setTextColor(60, 60, 60);
-      doc.text("Capacidad para generar ideas innovadoras y soluciones efectivas", 20, 153);
+      // Función para dibujar una competencia con icono
+      const dibujarCompetencia = (titulo, descripcion, x, y) => {
+        // Círculo de fondo para el icono
+        doc.setFillColor(245, 245, 245);
+        doc.circle(x + 3, y - 2, 2.5, 'F');
+        
+        // Título de la competencia
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(255, 44, 44);
+        doc.text(titulo, x + 8, y);
+        
+        // Descripción de la competencia
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(60, 60, 60);
+        doc.text(descripcion, x + 8, y + 6);
+      };
+        // Dibujamos las competencias en dos columnas
+      dibujarCompetencia(
+        "Creatividad",
+        "Capacidad para generar ideas innovadoras y soluciones efectivas",
+        20, 147
+      );
       
-      doc.setFontSize(12);
-      doc.setTextColor(255, 44, 44);
-      doc.text("Trabajo en equipo", 120, 147);
-      doc.setFontSize(10);
-      doc.setTextColor(60, 60, 60);
-      doc.text("Colaboración efectiva y comunicación clara con compañeros", 120, 153);
+      dibujarCompetencia(
+        "Trabajo en equipo",
+        "Colaboración efectiva y comunicación clara con compañeros",
+        105, 147
+      );
       
-      doc.setFontSize(12);
-      doc.setTextColor(255, 44, 44);
-      doc.text("Atención al detalle", 20, 163);
-      doc.setFontSize(10);
-      doc.setTextColor(60, 60, 60);
-      doc.text("Enfoque meticuloso hacia la calidad y precisión", 20, 169);
+      dibujarCompetencia(
+        "Atención al detalle",
+        "Enfoque meticuloso hacia la calidad y precisión",
+        20, 167
+      );
       
       doc.setFontSize(12);
       doc.setTextColor(255, 44, 44);
@@ -270,20 +308,55 @@
       doc.setFontSize(10);
       doc.setTextColor(60, 60, 60);
       doc.text("Búsqueda constante de nuevos conocimientos y actualización", 20, 185);
-      
-      // Competencias de idiomas
+        // Competencias de idiomas con diseño mejorado
+      doc.setFont("helvetica", "bold");
       doc.setFontSize(14);
       doc.setTextColor(255, 44, 44);
       doc.text("COMPETENCIAS DE IDIOMAS", 20, 200);
-      doc.line(20, 202, 120, 202);
+      doc.setLineWidth(0.5);
+      doc.line(20, 202, 190, 202);
+      
+      // Función para dibujar niveles de idioma
+      const dibujarNivelIdioma = (idioma, nivel, niveles, x, y) => {
+        // Nombre del idioma
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(255, 44, 44);
+        doc.text(idioma, x, y);
+        
+        // Nivel general
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.setTextColor(60, 60, 60);
+        doc.text(nivel, x, y + 6);
+        
+        // Niveles específicos
+        doc.setFontSize(10);
+        let posY = y + 14;
+        niveles.forEach(({nombre, porcentaje, nivel}) => {
+          doc.text(`${nombre} ${nivel ? `(${nivel})` : ''}:`, x, posY);
+          doc.text(`${porcentaje}%`, x + 50, posY);
+          
+          // Barra de nivel
+          doc.setDrawColor(240, 240, 240);
+          doc.setFillColor(240, 240, 240);
+          doc.roundedRect(x, posY + 2, 45, 2, 1, 1, 'F');
+          
+          doc.setDrawColor(255, 44, 44);
+          doc.setFillColor(255, 44, 44);
+          doc.roundedRect(x, posY + 2, 45 * (porcentaje/100), 2, 1, 1, 'F');
+          
+          posY += 8;
+        });
+      };
       
       // Español
-      doc.setFontSize(12);
-      doc.setTextColor(255, 44, 44);
-      doc.text("Español", 20, 212);
-      doc.setFontSize(11);
-      doc.setTextColor(60, 60, 60);
-      doc.text("Nativo", 20, 218);
+      const nivelesEspanol = [
+        {nombre: "Comprensión", porcentaje: 100},
+        {nombre: "Expresión", porcentaje: 100},
+        {nombre: "Escritura", porcentaje: 100}
+      ];
+      dibujarNivelIdioma("Español", "Nativo", nivelesEspanol, 20, 212);
       
       // Barras español
       doc.setFontSize(9);
