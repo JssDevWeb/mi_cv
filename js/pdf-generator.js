@@ -358,9 +358,7 @@
                 currentY += 6;
                 doc.setFontSize(11);
                 doc.text("2004–2008 | Nivel 2 EQF-MEC", 20, currentY);
-                currentY += 15; // Space before next section
-
-                // Competencias personales con mejor formato (now in single column)
+                currentY += 15; // Space before next section                // Competencias personales
                 doc.setFont("helvetica", "bold");
                 doc.setFontSize(14);
                 doc.setTextColor(255, 44, 44);
@@ -370,65 +368,49 @@
                 doc.line(20, currentY, 190, currentY);
                 currentY += 8;
 
-                currentY = dibujarCompetencia(
-                    doc,
-                    "Creatividad",
-                    "Capacidad para generar ideas innovadoras y soluciones efectivas",
-                    20, currentY
-                );
-                currentY = dibujarCompetencia(
-                    doc,
-                    "Trabajo en equipo",
-                    "Colaboración efectiva y comunicación clara con compañeros",
-                    20, currentY
-                );
-                currentY = dibujarCompetencia(
-                    doc,
-                    "Atención al detalle",
-                    "Enfoque meticuloso hacia la calidad y precisión",
-                    20, currentY
-                );
-                currentY = dibujarCompetencia(
-                    doc,
-                    "Proactividad",
-                    "Iniciativa para anticipar problemas y proponer soluciones",
-                    20, currentY
-                );
-                currentY = dibujarCompetencia(
-                    doc,
-                    "Aprendizaje continuo",
-                    "Búsqueda constante de nuevos conocimientos y actualización",
-                    20, currentY
-                );
-                currentY += 10; // Space after personal competencies
+                // Dibujar competencias en una disposición más ordenada
+                currentY = dibujarCompetencia(doc, "Creatividad", 
+                    "Capacidad para generar ideas innovadoras y soluciones efectivas", 20, currentY);
+                
+                currentY = dibujarCompetencia(doc, "Trabajo en equipo", 
+                    "Colaboración efectiva y comunicación clara con compañeros", 20, currentY);
+                
+                currentY = dibujarCompetencia(doc, "Atención al detalle", 
+                    "Enfoque meticuloso hacia la calidad y precisión", 20, currentY);
+                
+                currentY = dibujarCompetencia(doc, "Proactividad", 
+                    "Iniciativa para anticipar problemas y proponer soluciones", 20, currentY);
+                
+                currentY = dibujarCompetencia(doc, "Aprendizaje continuo", 
+                    "Búsqueda constante de nuevos conocimientos y actualización", 20, currentY);
+                
+                currentY += 10;
 
-                // Competencias de idiomas con diseño mejorado
+                // Competencias de idiomas
                 doc.setFont("helvetica", "bold");
                 doc.setFontSize(14);
                 doc.setTextColor(255, 44, 44);
                 doc.text("COMPETENCIAS DE IDIOMAS", 20, currentY);
                 currentY += 2;
-                doc.setLineWidth(0.5);
                 doc.line(20, currentY, 190, currentY);
                 currentY += 8;
 
                 // Español
                 const nivelesEspanol = [
-                    { nombre: "Comprensión", porcentaje: 100 },
-                    { nombre: "Expresión", porcentaje: 100 },
-                    { nombre: "Escritura", porcentaje: 100 }
+                    {nombre: "Comprensión", porcentaje: 100},
+                    {nombre: "Expresión", porcentaje: 100},
+                    {nombre: "Escritura", porcentaje: 100}
                 ];
                 currentY = dibujarNivelIdioma(doc, "Español", "Nativo", nivelesEspanol, 20, currentY);
-                currentY += 10; // Space between languages
+                currentY += 5;
 
                 // Inglés
                 const nivelesIngles = [
-                    { nombre: "Comprensión auditiva", porcentaje: 75, nivel: "B2" },
-                    { nombre: "Comprensión lectora", porcentaje: 65, nivel: "B1" },
-                    { nombre: "Expresión oral", porcentaje: 50, nivel: "A2" }
+                    {nombre: "Comprensión auditiva", porcentaje: 75, nivel: "B2"},
+                    {nombre: "Comprensión lectora", porcentaje: 65, nivel: "B1"},
+                    {nombre: "Expresión oral", porcentaje: 50, nivel: "A2"}
                 ];
-                currentY = dibujarNivelIdioma(doc, "Inglés", "Intermedio", nivelesIngles, 20, currentY);
-                currentY += 15; // Space before next section
+                currentY = dibujarNivelIdioma(doc, "Inglés", "Intermedio", nivelesIngles, 20, currentY);                currentY += 15; // Space before next section
 
                 // Proyectos destacados
                 doc.setFontSize(14);

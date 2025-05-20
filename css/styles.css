@@ -140,13 +140,14 @@ a:focus-visible, .icon-social:focus-visible img {
 
 .disponible {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: linear-gradient(135deg, #2ecc40 60%, #27ae60 100%);
-  border: 2px solid #FF2C2C;
-  box-shadow: 0 0 8px 2px #2ecc40a0;
+  border: 1.5px solid #FF2C2C;
+  box-shadow: 0 0 6px 1px #2ecc40a0;
   vertical-align: middle;
+  margin-right: 2px;
   animation: pulse 2s infinite;
 }
 
@@ -215,17 +216,18 @@ a:focus-visible, .icon-social:focus-visible img {
 
 .header-disponible-badge {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: rgba(35, 37, 38, 0.9);
+  bottom: 5px;
+  right: 5px;
+  background: rgba(35, 37, 38, 0.95);
   border: 1px solid #FF2C2C;
-  border-radius: 20px;
-  padding: 4px 12px;
+  border-radius: 15px;
+  padding: 3px 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 0.75rem;
+  gap: 4px;
+  font-size: 0.7rem;
+  line-height: 1;
   color: #f5f5f5;
   z-index: 3;
 }
